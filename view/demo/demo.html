@@ -1,0 +1,513 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MD BootstrapPersianDateTimePicker Demo</title>
+  <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="../src/mds.bs.datetimepicker.style.css" />
+  <script src="../dist/mds.bs.datetimepicker.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <link rel="stylesheet" href="demo.css" />
+</head>
+
+<body class="bg-light">
+  <div class="container-fluid" id="vueAppOptions">
+    <h1 class="h2">MD BootstrapPersianDateTimePicker Demo</h1>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="container-fluid bg-white">
+          <div class="row">
+            <div class="col-12">
+              <h2>Options</h2>
+              <hr>
+              <!-- persianNumber -->
+              <div class="row">
+                <label class="col-5 col-form-label">persianNumber</label>
+                <div class="col-7 pt-2">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="persianNumberRadioOptions"
+                      id="persianNumberRadioOptionsId1" value="1" v-model="persianNumber"
+                      v-on:change="optionChange('persianNumber', true)">
+                    <label class="form-check-label" for="persianNumberRadioOptionsId1">true</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="persianNumberRadioOptions"
+                      id="persianNumberRadioOptionsId2" value="0" v-model="persianNumber"
+                      v-on:change="optionChange('persianNumber', false)">
+                    <label class="form-check-label" for="persianNumberRadioOptionsId2">false</label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- disabled -->
+              <div class="row">
+                <label class="col-5 col-form-label">disabled</label>
+                <div class="col-7 pt-2">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="disabledRadioOptions"
+                      id="disabledRadioOptionsId1" value="1" v-model="disabled"
+                      v-on:change="optionChange('disabled', true)">
+                    <label class="form-check-label" for="disabledRadioOptionsId1">true</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="disabledRadioOptions"
+                      id="disabledRadioOptionsId2" value="0" v-model="disabled"
+                      v-on:change="optionChange('disabled', false)">
+                    <label class="form-check-label" for="disabledRadioOptionsId2">false</label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- isGregorian -->
+              <div class="row">
+                <label class="col-5 col-form-label">isGregorian</label>
+                <div class="col-7 pt-2">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="isGregorianRadioOptions"
+                      id="isGregorianRadioOptionsId1" value="1" v-model="isGregorian"
+                      v-on:change="optionChange('isGregorian', true)">
+                    <label class="form-check-label" for="isGregorianRadioOptionsId1">true</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="isGregorianRadioOptions"
+                      id="isGregorianRadioOptionsId2" value="0" v-model="isGregorian"
+                      v-on:change="optionChange('isGregorian', false)">
+                    <label class="form-check-label" for="isGregorianRadioOptionsId2">false</label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- inLine -->
+              <div class="row">
+                <label class="col-5 col-form-label">inLine</label>
+                <div class="col-7 pt-2">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inLineRadioOptions" id="inLineRadioOptionsId1"
+                      value="1" v-model="inLine" v-on:change="optionChange('inLine', true)">
+                    <label class="form-check-label" for="inLineRadioOptionsId1">true</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inLineRadioOptions" id="inLineRadioOptionsId2"
+                      value="0" v-model="inLine" v-on:change="optionChange('inLine', false)">
+                    <label class="form-check-label" for="inLineRadioOptionsId2">false</label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- modalMode -->
+              <div class="row">
+                <label class="col-5 col-form-label">modalMode</label>
+                <div class="col-7 pt-2">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="modalModeRadioOptions"
+                      id="modalModeRadioOptionsId1" value="1" v-model="modalMode"
+                      v-on:change="optionChange('modalMode', true)">
+                    <label class="form-check-label" for="modalModeRadioOptionsId1">true</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="modalModeRadioOptions"
+                      id="modalModeRadioOptionsId2" value="0" v-model="modalMode"
+                      v-on:change="optionChange('modalMode', false)">
+                    <label class="form-check-label" for="modalModeRadioOptionsId2">false</label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- enableTimePicker -->
+              <div class="row">
+                <label class="col-5 col-form-label">enableTimePicker</label>
+                <div class="col-7 pt-2">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="enableTimePickerInlineRadioOptions"
+                      id="enableTimePickerInlineRadioOptionsId1" value="1" v-model="enableTimePicker"
+                      v-on:change="optionChange('enableTimePicker', true)">
+                    <label class="form-check-label" for="enableTimePickerInlineRadioOptionsId1">true</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="enableTimePickerInlineRadioOptions"
+                      id="enableTimePickerInlineRadioOptionsId2" value="0" v-model="enableTimePicker"
+                      v-on:change="optionChange('enableTimePicker', false)">
+                    <label class="form-check-label" for="enableTimePickerInlineRadioOptionsId2">false</label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- toDate, fromDate -->
+              <div class="row">
+                <label class="col-5 col-form-label">toDate, fromDate</label>
+                <div class="col-7 pt-2">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="toDateFromDateRadioOptions"
+                      id="toDateRadioOptionsId1" value="1" v-model="toDateFromDate"
+                      v-on:change="optionChange('toDateFromDate', true)">
+                    <label class="form-check-label" for="toDateRadioOptionsId1">true</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="toDateFromDateRadioOptions"
+                      id="toDateRadioOptionsId2" value="0" v-model="toDateFromDate"
+                      v-on:change="optionChange('toDateFromDate', false)">
+                    <label class="form-check-label" for="toDateRadioOptionsId2">false</label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- groupId -->
+              <div class="row">
+                <label class="col-5 col-form-label">groupId</label>
+                <div class="col-7 pt-2">
+                  <input class="form-control form-control-sm" type="text" value="group1" v-model="groupId"
+                    :readonly="toDateFromDate == '0'" v-on:change="optionChange('groupId', $event.target.value)">
+                </div>
+              </div>
+              <hr>
+              <!-- rangeSelector -->
+              <div class="row">
+                <label class="col-5 col-form-label">rangeSelector</label>
+                <div class="col-7 pt-2">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="rangeSelectorRadioOptions"
+                      id="rangeSelectorRadioOptionsId1" value="1" v-model="rangeSelector"
+                      v-on:change="optionChange('rangeSelector', true)">
+                    <label class="form-check-label" for="rangeSelectorRadioOptionsId1">true</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="rangeSelectorRadioOptions"
+                      id="rangeSelectorRadioOptionsId2" value="0" v-model="rangeSelector"
+                      v-on:change="optionChange('rangeSelector', false)">
+                    <label class="form-check-label" for="rangeSelectorRadioOptionsId2">false</label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- rangeSelectorMonthsToShow -->
+              <div class="row">
+                <label class="col-5 col-form-label">rangeSelectorMonthsToShow</label>
+                <div class="col-2"></div>
+                <div class="col-2 pt-2">
+                  <input class="form-control form-control-sm" type="number" min="0" max="3" value="0"
+                    :readonly="rangeSelector == '0'" v-model="rangeSelectorMonthsToShowStart"
+                    v-on:change="optionChange('rangeSelectorMonthsToShow', [$event.target.value, rangeSelectorMonthsToShowEnd])"
+                    style="width: 50px;">
+                </div>
+                <div class="col-2 pt-2">
+                  <input class="form-control form-control-sm" type="number" min="0" max="3" value="0"
+                    :readonly="rangeSelector == '0'" v-model="rangeSelectorMonthsToShowEnd"
+                    v-on:change="optionChange('rangeSelectorMonthsToShow', [rangeSelectorMonthsToShowStart, $event.target.value])"
+                    style="width: 50px;">
+                </div>
+              </div>
+              <hr>
+              <!-- textFormat -->
+              <div class="row">
+                <label class="col-5 col-form-label">textFormat</label>
+                <div class="col-7 pt-2">
+                  <div class="input-group input-group-sm">
+                    <input class="form-control form-control-sm" type="text" v-model="textFormat"
+                      v-on:change="optionChange('textFormat', $event.target.value)">
+                    <span class="input-group-text cursor-pointer" data-bs-toggle="modal"
+                      data-bs-target="#textDateFormatModal">Detail</span>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- dateFormat -->
+              <div class="row">
+                <label class="col-5 col-form-label">dateFormat</label>
+                <div class="col-7 pt-2">
+                  <div class="input-group input-group-sm">
+                    <input class="form-control form-control-sm" type="text" v-model="dateFormat"
+                      v-on:change="optionChange('dateFormat', $event.target.value)">
+                    <span class="input-group-text cursor-pointer" data-bs-toggle="modal"
+                      data-bs-target="#textDateFormatModal">Detail</span>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <!-- yearOffset -->
+              <div class="row">
+                <label class="col-5 col-form-label">yearOffset</label>
+                <div class="col-7 pt-2">
+                  <input class="form-control form-control-sm" type="number" value="15" min="0" v-model="yearOffset"
+                    v-on:change="optionChange('yearOffset', $event.target.value)">
+                </div>
+              </div>
+              <hr>
+              <!-- placement -->
+              <div class="row">
+                <label class="col-5 col-form-label">placement</label>
+                <div class="col-7 pt-2">
+                  <select class="form-select form-select-sm" v-model="placement"
+                    v-on:change="optionChange('placement', $event.target.value)">
+                    <option value="auto">auto</option>
+                    <option value="top">top</option>
+                    <option value="bottom" selected>bottom</option>
+                    <option value="left">left</option>
+                    <option value="right">right</option>
+                  </select>
+                </div>
+              </div>
+              <hr>
+              <!-- holidays -->
+              <div class="row">
+                <label class="col-5 col-form-label">holidays</label>
+                <div class="col-7 pt-2">
+                  <div v-for="(date, index) in holidays" :key="index">
+                    <input class="form-control form-control-sm" type="text" v-model="holidays[index]"
+                      v-on:change="dateChange('holidays', $event)" />
+                  </div>
+                  <button class="btn btn-sm btn-primary" type="button" v-on:click="addDateItem('holidays')"> + </button>
+                  &nbsp;
+                  <button class="btn btn-sm btn-danger" type="button" v-on:click="removeDateItem('holidays')"> - </button>
+                </div>
+              </div>
+              <hr>
+              <!-- specialDates -->
+              <div class="row">
+                <label class="col-5 col-form-label">specialDates</label>
+                <div class="col-7 pt-2">
+                  <div v-for="(date, index) in specialDates" :key="index">
+                    <input class="form-control form-control-sm" type="text" v-model="specialDates[index]"
+                      v-on:change="dateChange('specialDates', $event)" />
+                  </div>
+                  <button class="btn btn-sm btn-primary" type="button" v-on:click="addDateItem('specialDates')"> + </button>
+                  &nbsp;
+                  <button class="btn btn-sm btn-danger" type="button" v-on:click="removeDateItem('specialDates')"> -
+                  </button>
+                </div>
+              </div>
+              <hr>
+              <!-- disabledDates -->
+              <div class="row">
+                <label class="col-5 col-form-label">disabledDates</label>
+                <div class="col-7 pt-2">
+                  <div v-for="(date, index) in disabledDates" :key="index">
+                    <input class="form-control form-control-sm" type="text" v-model="disabledDates[index]"
+                      v-on:change="dateChange('disabledDates', $event)" />
+                  </div>
+                  <button class="btn btn-sm btn-primary" type="button" v-on:click="addDateItem('disabledDates')"> +
+                  </button>
+                  &nbsp;
+                  <button class="btn btn-sm btn-danger" type="button" v-on:click="removeDateItem('disabledDates')"> -
+                  </button>
+                </div>
+              </div>
+              <hr>
+              <!-- disabledDays -->
+              <div class="row">
+                <label class="col-5 col-form-label">disabledDays</label>
+                <div class="col-7 pt-2">
+                  <div v-for="(date, index) in disabledDays" :key="index">
+                    <input class="form-control form-control-sm" type="text" v-model="disabledDays[index]"
+                      v-on:change="dateChange('disabledDays', $event)" />
+                  </div>
+                  <button class="btn btn-sm btn-primary" type="button" v-on:click="addDateItem('disabledDays')"> + </button>
+                  &nbsp;
+                  <button class="btn btn-sm btn-danger" type="button" v-on:click="removeDateItem('disabledDays')"> -
+                  </button>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <a href="https://github.com/Mds92/MD.BootstrapPersianDateTimePicker" target="_blank">
+                <img src="images/github.png" style="width: 32px; height: 32px;" alt="MD.BootstrapPersianDateTimePicker" />
+                GitHub Source
+              </a>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 150px;">
+            <!-- Normal -->
+            <div class="col-12" :hidden="inLine == '1' && modalMode == '0'">
+              <h3 :hidden="toDateFromDate == '0'">From Date</h3>
+              <div class="input-group mb-3">
+                <span class="input-group-text cursor-pointer" id="dtp1">📅</span>
+                <input type="text" class="form-control" placeholder="Date Picker Text" data-name="dtp1-text">
+                <input type="text" class="form-control" placeholder="Date Picker Date" data-name="dtp1-date">
+              </div>
+              <h3 :hidden="toDateFromDate == '0'">To Date</h3>
+              <div class="input-group mb-3" :hidden="toDateFromDate == '0'">
+                <span class="input-group-text cursor-pointer" id="dtp2">📅</span>
+                <input type="text" class="form-control" placeholder="Date Picker Text" data-name="dtp2-text">
+                <input type="text" class="form-control" placeholder="Date Picker Date" data-name="dtp2-date">
+              </div>
+            </div>
+            <!-- In Line -->
+            <div class="col-12" :hidden="inLine == '0' || modalMode == '1'">
+              <div class="row justify-content-md-center">
+                <div class="col-5">
+                  <h3 :hidden="toDateFromDate == '0'">From Date</h3>
+                  <div class="border mb-3" data-name="in-line-dtp1"></div>
+                  <div class="row g-0">
+                    <div class="col-6">
+                      <input type="text" class="form-control" placeholder="Text" data-name="in-line-dtp1-text">
+                    </div>
+                    <div class="col-6">
+                      <input type="text" class="form-control" placeholder="Date Value" data-name="in-line-dtp1-date">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-5" :hidden="toDateFromDate == '0'">
+                  <h3>To Date</h3>
+                  <div class="border mb-3" data-name="in-line-dtp2"></div>
+                  <div class="row g-0">
+                    <div class="col-6">
+                      <input type="text" class="form-control" placeholder="Text" data-name="in-line-dtp2-text">
+                    </div>
+                    <div class="col-6">
+                      <input type="text" class="form-control" placeholder="Date Value" data-name="in-line-dtp2-date">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Text/Date Format modal -->
+  <div class="modal fade" id="textDateFormatModal" tabindex="-1" aria-labelledby="textDateFormatModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="textDateFormatModalLabel">
+            Text/Date Format Detail
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-sm table-hover table-hover table-striped">
+            <thead>
+              <th> Format </th>
+              <th> Description </th>
+              <th> Persian Description </th>
+            </thead>
+            <tbody>
+              <tr>
+                <td> yyyy </td>
+                <td> Four digits year </td>
+                <td> سال چهار رقمی </td>
+              </tr>
+              <tr>
+                <td> yy </td>
+                <td> Two digits year </td>
+                <td> سال دو رقمی </td>
+              </tr>
+              <tr>
+                <td> MMMM </td>
+                <td> Month Name </td>
+                <td> نام ماه </td>
+              </tr>
+              <tr>
+                <td> MM </td>
+                <td> Two digits month number </td>
+                <td> شماره دو رقمی ماه </td>
+              </tr>
+              <tr>
+                <td> M </td>
+                <td> One digit year </td>
+                <td> شماره تک رقمی ماه </td>
+              </tr>
+              <tr>
+                <td> dddd </td>
+                <td> Week day name </td>
+                <td> نام روز هفته </td>
+              </tr>
+              <tr>
+                <td> dd </td>
+                <td> Two digits month day number </td>
+                <td> شماره دو رقمی روز ماه </td>
+              </tr>
+              <tr>
+                <td> d </td>
+                <td> One digit month day number </td>
+                <td> عدد یک رقمی روز ماه </td>
+              </tr>
+              <tr>
+                <td> HH </td>
+                <td> Two digits hour number </td>
+                <td> شماره ساعت دو رقمی با فرمت 00 تا 24 </td>
+              </tr>
+              <tr>
+                <td> H </td>
+                <td> One digit hour number </td>
+                <td> شماره ساعت تک رقمی با فرمت 00 تا 24 </td>
+              </tr>
+              <tr>
+                <td> hh </td>
+                <td> Two digits hour number </td>
+                <td> شماره ساعت دو رقمی با فرمت 0 تا 12 </td>
+              </tr>
+              <tr>
+                <td> h </td>
+                <td> One digit hour number </td>
+                <td> شماره ساعت تک رقمی با فرمت 0 تا 12 </td>
+              </tr>
+              <tr>
+                <td> mm </td>
+                <td> Two digits minute number </td>
+                <td> عدد دو رقمی دقیقه </td>
+              </tr>
+              <tr>
+                <td> m </td>
+                <td> One digit minute number </td>
+                <td> عدد تک رقمی دقیقه </td>
+              </tr>
+              <tr>
+                <td> ss </td>
+                <td> Two digits second number </td>
+                <td> عدد دو رقمی ثانیه </td>
+              </tr>
+              <tr>
+                <td> s </td>
+                <td> One digit second number </td>
+                <td> عدد تک رقمی ثانیه </td>
+              </tr>
+              <tr>
+                <td> fff </td>
+                <td> Three digits milliseconds number </td>
+                <td> عدد سه رقمی میلی ثانیه </td>
+              </tr>
+              <tr>
+                <td> ff </td>
+                <td> Two digits milliseconds number </td>
+                <td> عدد دو رقمی میلی ثانیه </td>
+              </tr>
+              <tr>
+                <td> f </td>
+                <td> One digit milliseconds number </td>
+                <td> عدد تک رقمی میلی ثانیه </td>
+              </tr>
+              <tr>
+                <td> tt </td>
+                <td> AM/PM </td>
+                <td> ب.ظ یا ق.ظ </td>
+              </tr>
+              <tr>
+                <td> t </td>
+                <td> First letter of AM/PM </td>
+                <td> اولین حرف از ب.ظ یا ق.ظ </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="demo.js" type="text/javascript"></script>
+</body>
+
+</html>
