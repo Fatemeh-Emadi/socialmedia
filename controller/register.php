@@ -54,7 +54,11 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION["message"]="Invalid email format";
     $_SESSION["message_type"]="error";
 }
-
+if (empty($_POST["email"])) {
+    //$emailErr = "Email is required";
+    $_SESSION["message"]="Email is required";
+    $_SESSION["message_type"]="error";
+  } 
 header("Location:index");
 
 
