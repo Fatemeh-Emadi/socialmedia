@@ -1,5 +1,12 @@
 <?php include "header.php"; ?>
-<?php include "navbar.php"; ?>
+<?php include "navbar.php"; 
+$posts=$db->query("SELECT * FROM posts ");
+//$user_id=$posts["user_id"];
+//$users=$db->query("SELECT * FROM users WHERE id=$user_id")->fetch_assoc();
+
+
+
+?>
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6 ">
@@ -10,10 +17,10 @@
           What's on your mind?
         </div>
         <div class="card-body">
-          <form method="post" action="controller/posts.php" id="new-post-form">
+          <form method="post" action="posts" id="new-post-form">
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">Write caption</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="caption"></textarea>
             </div>
             <div class=" mb-3">
 
@@ -30,20 +37,22 @@
   </div>
   <div class="row justify-content-center mt-5">
     <div class="col-6 ">
+      <?php foreach($posts as $post):?>
       <div class="card">
         <div class="card-header ">
           <div class="row">
             <div class="col-2 mt-3">
-              <img src="images/a.jpg" class="img-fluid rounded-circle " alt="...">
+              <img src="" class="img-fluid rounded-circle " alt="...">
 
             </div>
-            <div class="col-10 mt-4">
+            
+                  
               <p>
-                fateme
-
+                
+           
               </p>
               <p class="text-secondary"> <small>
-                  7 hours ago
+              <?php echo $post["time"];?>
                 </small></p>
 
             </div>
@@ -52,10 +61,10 @@
         </div>
 
         <div class="card-body">
-          <p>Hello:) My name is fateme</p>
-          <img src="images/a.jpg " class="img-fluid">
+          <p><?php echo $post["caption"];?></p>
+          <img src="<?php echo $post["media"];?>" class="img-fluid" >
         </div>
-
+       
         <div class="card-footer">
           <button type="button" class="btn  position-relative mt-1">
             <i class="fa fa-heart"></i>
@@ -66,7 +75,9 @@
           </button>
         </div>
       </div>
-
+      <br>
+      <br>
+     <?php endforeach;?>
     </div>
   </div>
 

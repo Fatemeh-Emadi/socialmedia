@@ -1,5 +1,5 @@
-<?php include "database.php";
-
+<?php include "model/database.php";
+session_start();
 $firstname = $_POST["fname"];
 $lastname = $_POST["lname"];
 $username = $_POST["username"];
@@ -21,16 +21,36 @@ else
     $gender = 0;
 }
 $pass_length=strlen($password);
-if($password==$confirm_pass && $pass_length>4){
+if($password==$confirm_pass){
+
+    if(strlen($username)>=4){
+        $users_count=$db->query("SELECT * FROM users WHERE username='$username'")->num_rows;
     
-    $db->query("INSERT INTO users(first_name,last_name,username,password,email,birthday,mobile_number,gender) VALUES('$firstname','$lastname','$username','$password','$email','$birthday','$phone',$gender)");
-    //echo"a3";
-    header("Location: ../view/index.php");
+    
+    if($users_count == 0)
+    {
+    $secure_password=md5($password);
+    $db->query("INSERT INTO users(first_name,last_name,username,password,email,birthday,mobile_number,gender) VALUES('$firstname','$lastname','$username','$secure_password','$email','$birthday','$phone',$gender)");
+    $_SESSION["message"]="Congratulation:) Welcome to our family.";
+    $_SESSION["message_type"]="success";
+    }
+    else
+    {
+    $_SESSION["message"]="This username is already taken" ;
+    $_SESSION["message_type"]="error";
+    }
 }
 else{
-    echo "Unvalid password";
+    $_SESSION["message"]="Your username length must be >=4 " ;
+    $_SESSION["message_type"]="error";
+}
+}
+else{
+    $_SESSION["message"]="Unvalid password";
+    $_SESSION["message_type"]="error";
 }
 
+header("Location:index");
 
 
 
