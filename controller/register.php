@@ -49,6 +49,11 @@ else{
     $_SESSION["message"]="Unvalid password";
     $_SESSION["message_type"]="error";
 }
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    //$emailErr = "Invalid email format";
+    $_SESSION["message"]="Invalid email format";
+    $_SESSION["message_type"]="error";
+}
 
 header("Location:index");
 
