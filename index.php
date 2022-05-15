@@ -1,39 +1,41 @@
 <?php
 session_start();
 $request=$_SERVER["REQUEST_URI"];
+$request=str_replace("/fatigram","",$request);
 switch($request)
 {
-    case("/fatigram/"):
+    case("/"):
 
-    case("/fatigram/index"):
-        require __DIR__ . "/view/index.php";
+    case("/index"):
+        require "controller/index.php";
         break;
-    case("/fatigram/home"):
+    case("/home"):
         if ($_SESSION["login_status"] == null && $_SESSION["login_status"] == false){
-            require __DIR__ . "/view/index.php"; 
+            require "controller/index.php"; 
         //require __DIR__ . "/view/home.php";
         }
         else{
-            require __DIR__ . "/view/home.php";   
+            require "controller/home.php";   
         }
         break;
-    case("/fatigram/login"):
-        require __DIR__ . "/controller/login.php";
+    case("/login"):
+        require "controller/login.php";
         break;
-     case("/fatigram/register"):
-        require __DIR__ . "/controller/register.php";
+     case("/register"):
+        require "controller/register.php";
         break;
-    case("/fatigram/posts"):
-        require __DIR__ . "/controller/posts.php";
+    case("/posts"):
+        require "controller/posts.php";
         break;
-    case("/fatigram/personal.php"):
-        require __DIR__ . "/view/personal.php";
+    case("/personal.php"):
+        require "view/personal.php";
         break;
-        case("/fatigram/logout.php"):
-            require __DIR__ . "/controller/logout.php";
+        case("/logout.php"):
+            require "controller/logout.php";
             break;
     default:
-    require __DIR__ . "/view/404.php";
+    require __DIR__ . $request;
+    //require __DIR__ . "view/404.php";
 }
 
 
