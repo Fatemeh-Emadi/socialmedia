@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="view/css/jquery.md.bootstrap.datetimepicker.style.css" />
         <link rel="stylesheet" href="view/dist/mds.bs.datetimepicker.style.css">
         
-    </head>
+ 
 
     </head>
     <body>
