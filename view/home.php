@@ -35,21 +35,38 @@
   </div>
   <div class="row justify-content-center mt-5">
     <div class="col-6 ">
-      <?php foreach ($posts as $post) : ?>
+      <?php foreach ($posts_array as $post) : ?>
         <div class="card">
           <div class="card-header ">
             <div class="row">
               <div class="col-2 mt-3">
-                <img src=" <?php echo $post["image"]; ?>" class="img-fluid rounded-circle " alt="...">
+                <img src=" <?php 
+                if($post["image"] != "")
+                {
+                  echo $post["image"];
+                }
+                else
+                {
+                  if($post["gender"]==1)
+                  {
+                    echo "images\users\woman.png";
+                  }
+                  else
+                  {
+                    echo "images\users\man.png";
+                  }
+
+                }
+                ?>" class="img-fluid rounded-circle " alt="...">
 
               </div>
               <div class="col-4 mt-3">
                 <p>
-                  <?php echo $post["username"]; ?>
+                  <?php echo $post["first_name"]; ?>
 
                 </p>
                 <p class="text-secondary"> <small>
-                    <?php echo $post["time"]; ?>
+                    <?php echo time2str($post["time"]); ?>
                   </small></p>
               </div>
             </div>
@@ -59,7 +76,7 @@
 
           <div class="card-body">
             <p><?php echo $post["caption"]; ?></p>
-            <img src="<?php echo $post["media"]; ?>" class="img-fluid" width="100%" ;>
+            <img src="<?php echo $post["media"]; ?>" class="img-fluid" width="100%" ;loading="lazy">
           </div>
 
           <div class="card-footer">
@@ -70,8 +87,8 @@
                 <button type="button" class="btn  position-relative mt-1">
                   <i class="fa fa-heart"></i>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    99+
-                    <span class="visually-hidden">unread messages</span>
+                  <?php echo $post["likes"]["count"]; ?>
+                    
                   </span>
                 </button>
 
@@ -92,23 +109,24 @@
             </div>
             <div class="row">
               <div class="col">
-                <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $post["p_id"]; ?> " aria-expanded="false" aria-controls="collapse<?php echo $post["p_id"]; ?>">
+                <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $post["id_post"]; ?> " aria-expanded="false" aria-controls="collapse<?php echo $post["id_post"]; ?>">
                   Comments
                 </button>
                 </p>
-                <div class="collapse" id="collapse<?php echo $post["p_id"]; ?>">
+                <div class="collapse" id="collapse<?php echo $post["id_post"]; ?>">
                   <div class="list-group">
-                    <?php foreach ($comments as $comment) : ?>
-                      <?php if ($post["p_id"] == $comment["post_id"]) : ?>
+                    <?php foreach ($post["comments"] as $comment) : ?>
+                    
                         <a href="#" class="list-group-item list-group-item-action" aria-current="true">
 
                           <div class="d-flex w-100 justify-content-between">
-
+                          <small> <?php echo $comment["username"]; ?></small>
+                          
                             <h5 class="mb-1"><?php echo $comment["text"]; ?></h5>
-                            <small> <?php echo $comment["username"]; ?></small>
+                            <small> <?php echo time2str($comment["time"]); ?></small>
                           </div>
                         </a>
-                      <?php endif; ?>
+                    
 
                     <?php endforeach; ?>
                   </div>
