@@ -1,7 +1,7 @@
 <?php 
 include "model/database.php";
 include "controller/functions.php";
-$posts=$db->query("SELECT *, users.id AS id_kardar, posts.id AS id_post FROM posts INNER JOIN users ON posts.user_id=users.id ORDER BY time DESC");
+$posts=$db->query("SELECT *, users.id AS id_kardar, posts.id AS id_post FROM posts INNER JOIN users ON posts.user_id=users.id INNER JOIN follows WHERE follows.following_user_id=posts.user_id ORDER BY time DESC");
 //$posts=$db->query("SELECT * FROM posts INNER JOIN users ON posts.user_id=users.id");
 //$comments=$db->query("SELECT * FROM comments INNER JOIN users ON comments.user_id=users.id INNER JOIN posts ON comments.post_id=posts.p_id" );
 //$posts=$db->query("SELECT *,users.id AS id_karbar,posts.p_id AS id_post FROM posts INNER JOIN users ON posts.user_id=users.id");
