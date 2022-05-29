@@ -92,26 +92,27 @@ include "header.php"; ?>
           <div class="card-footer">
             <div class="row">
               <div class="col-3">
-
-
+                <form id="form-like-"<?php echo $post["id_post"];?>>
+                <input type="hidden" name="post_id2" value="<?php echo $post["id_post"];?>">
                 <button type="button" class="btn  position-relative mt-1">
                   <i class="fa fa-heart"></i>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     <?php echo $post["likes"]["count"]; ?>
 
                   </span>
-                </button>
-
+                
+                </form>
               </div>
               <div class="col-9">
-                <form class="row gy-2 gx-3 align-items-center">
+                <form class="row gy-2 gx-3 align-items-center" id="form-comment-<?php echo $post["id_post"];?>">
                   <div class="col-auto">
 
-                    <input type="text" class="form-control" id="autoSizingInput" placeholder="Write comment">
+                    <input type="text" class="form-control" id="autoSizingInput" placeholder="Write comment" name="text">
+                    <input type="hidden" name="post_id" value="<?php echo $post["id_post"]; ?>">
                   </div>
 
                   <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">send</button>
+                    <button type="button" class="btn btn-primary" onclick="send_comment(<?php echo $post["id_post"]; ?>)" >send</button>
                   </div>
                 </form>
 
@@ -124,22 +125,23 @@ include "header.php"; ?>
                 </button>
                 </p>
                 <div class="collapse" id="collapse<?php echo $post["id_post"]; ?>">
-                  <div class="list-group">
+                  <ul class="list-group" id="list-comments-<?php echo $post["id_post"]; ?>">
                     <?php foreach ($post["comments"] as $comment) : ?>
 
-                      <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                      <li class="list-group-item list-group-item-action" aria-current="true">
 
                         <div class="d-flex w-100 justify-content-between">
                           <small> <?php echo $comment["username"]; ?></small>
 
-                          <h5 class="mb-1"><?php echo $comment["text"]; ?></h5>
+                          
                           <small> <?php echo time2str($comment["time"]); ?></small>
                         </div>
-                      </a>
+                        <p class="mb-1"><?php echo $comment["text"]; ?></p>
+                    </li>
 
 
                     <?php endforeach; ?>
-                  </div>
+                    </ul>
                 </div>
               </div>
             </div>
@@ -155,5 +157,41 @@ include "header.php"; ?>
 
 </div>
 
+<script>
 
+
+async function send_comment(post_id){
+  let form = document.getElementById("form-comment-"+post_id);
+  let form_data = new FormData(form);
+
+  let x = await fetch("send-comment" , {
+    method:"post",
+    body:form_data
+  });
+  
+  let y = await x.text();
+ 
+    if(y==1){
+    let list_comments = document.getElementById("list-comments-"+post_id);
+
+    let li = document.createElement("LI");
+    li.classList.add("list-group-item");
+    li.classList.add("list-group-item-action");
+
+    let p=document.createElement("P");
+    p.classList.add("mb-1");
+    p.innerHTML = form_data.get("text");
+   
+    li.appendChild(p);   
+    list_comments.appendChild(li);
+    
+    }
+    else{
+      alert("error");
+    }
+
+
+}
+
+</script>
 <?php include "footer.php"; ?>
