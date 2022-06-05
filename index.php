@@ -27,12 +27,20 @@ switch($request)
     case("/posts"):
         require "controller/posts.php";
         break;
-        case("/send-comment"):
-            require "controller/send_comment.php";
-            break;
-    case("/personal.php"):
-        require "view/personal.php";
+    case("/send-comment"):
+        require "controller/send_comment.php";
         break;
+    case("/send-like"):
+        require "controller/send_like.php";
+        break;
+   
+    case("/personal"):
+        require "controller/personal.php";
+        break;
+    case("/follow"):
+        require "controller/follow.php";
+        break;
+    
         case("/logout.php"):
             require "controller/logout.php";
             break;

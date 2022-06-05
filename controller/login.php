@@ -16,6 +16,7 @@ if($users_count == 1)
     $user = $result->fetch_assoc();
     $_SESSION["login_status"] = true;
     $_SESSION["username"] = $username;
+    $_SESSION["user_image"]=$user["image"];
     $_SESSION["user_id"] = $user["id"];
     header("Location: home");
 }

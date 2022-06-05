@@ -12,12 +12,13 @@ include "model/database.php";
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
         <?php if($_SESSION["login_status"] != null && $_SESSION["login_status"] == true):?>
       <li class="nav-item">
           <a class="nav-link active" aria-current="page" href=""><i class="fa fa-user"></i> <?php echo $_SESSION["username"];?></a>
         </li>
         <?php endif;?>
-
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="personal">profile</a></li>
         <?php if($_SESSION["login_status"] != null && $_SESSION["login_status"] == true):?>
       <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="logout.php">log out</a>

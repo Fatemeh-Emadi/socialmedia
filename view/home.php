@@ -92,11 +92,11 @@ include "header.php"; ?>
           <div class="card-footer">
             <div class="row">
               <div class="col-3">
-                <form id="form-like-"<?php echo $post["id_post"];?>>
+                <form id="form-like-<?php echo $post["id_post"];?>">
                 <input type="hidden" name="post_id2" value="<?php echo $post["id_post"];?>">
-                <button type="button" class="btn  position-relative mt-1">
+                <button type="button" onclick='send_like(<?php echo $post["id_post"]; ?>)' class="btn btn-outline-secondary " id="btn-like-<?php echo $post["id_post"];?>">
                   <i class="fa fa-heart"></i>
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="count-like-<?php echo $post["id_post"];?>">
                     <?php echo $post["likes"]["count"]; ?>
 
                   </span>
@@ -107,12 +107,12 @@ include "header.php"; ?>
                 <form class="row gy-2 gx-3 align-items-center" id="form-comment-<?php echo $post["id_post"];?>">
                   <div class="col-auto">
 
-                    <input type="text" class="form-control" id="autoSizingInput" placeholder="Write comment" name="text">
+                    <input type="text" class="form-control"  placeholder="Write comment" name="text">
                     <input type="hidden" name="post_id" value="<?php echo $post["id_post"]; ?>">
                   </div>
 
                   <div class="col-auto">
-                    <button type="button" class="btn btn-primary" onclick="send_comment(<?php echo $post["id_post"]; ?>)" >send</button>
+                    <button type="button" onclick='send_comment(<?php echo $post["id_post"]; ?>)' class="btn btn-primary" >send</button>
                   </div>
                 </form>
 
@@ -157,41 +157,72 @@ include "header.php"; ?>
 
 </div>
 
-<script>
-
-
-async function send_comment(post_id){
-  let form = document.getElementById("form-comment-"+post_id);
-  let form_data = new FormData(form);
-
-  let x = await fetch("send-comment" , {
-    method:"post",
-    body:form_data
-  });
+<script >
+  function send_like(post_id){
+    let btn=document.getElementById("btn-like-"+post_id);
+    let count_number_tag=document.getElementById("count-like-"+post_id);
+    let form=document.getElementById("form-like-"+post_id);
+    let form_data=new FormData(form);
   
-  let y = await x.text();
- 
-    if(y==1){
-    let list_comments = document.getElementById("list-comments-"+post_id);
-
-    let li = document.createElement("LI");
-    li.classList.add("list-group-item");
-    li.classList.add("list-group-item-action");
-
-    let p=document.createElement("P");
-    p.classList.add("mb-1");
-    p.innerHTML = form_data.get("text");
-   
-    li.appendChild(p);   
-    list_comments.appendChild(li);
+    fetch("send-like",{
+      method:"post",
+      body:form_data
+    }).then(
+      result=>result.text()
+      
+    ).then(result=>{
+      console.log(result);
+      if(result==1){
+       
+        btn.classList.remove("btn-outline-secondary");
+        btn.classList.add("btn-secondary");
+        let number=count_number_tag.innerHTML;
+        number++;
+        count_number_tag.innerHTML=number;
+      }
+      else if(result==0){
+        btn.classList.remove("btn-secondary");
+        btn.classList.add("btn-outline-secondary");
+        let number=count_number_tag.innerHTML;
+        number--;
+        count_number_tag.innerHTML=number;
+      }
+    }).catch(error=>{
+      alert(error)
+    });
+  
+  }
+  
+   function send_comment(post_id){
+    let form = document.getElementById("form-comment-"+post_id);
+    let form_data = new FormData(form);
+  
+    fetch("send-comment" , {
+      method:"post",
+      body:form_data
+    }).then(result=>result.text()
+    ).then(result=>{
+      console.log(result);
+      if(result==1){
     
-    }
-    else{
-      alert("error");
-    }
-
-
-}
-
-</script>
+    
+      let list_comments = document.getElementById("list-comments-"+post_id);
+  
+      let li = document.createElement("LI");
+      li.classList.add("list-group-item");
+      li.classList.add("list-group-item-action");
+  
+      let p=document.createElement("P");
+      p.classList.add("mb-1");
+      p.innerHTML = form_data.get("text");
+     
+      li.appendChild(p);   
+      list_comments.appendChild(li);
+      }
+    }).catch(error=>{
+      alert(error);
+    });
+  
+  
+  }</script>
 <?php include "footer.php"; ?>
