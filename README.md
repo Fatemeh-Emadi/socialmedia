@@ -1,2 +1,5 @@
 
-![screencapture-localhost-fatigram-home-2022-05-27-01_21_02](https://user-images.githubusercontent.com/79381313/170579566-c5deb241-ed1b-4974-8717-68fc1b020f83.png)
+
+![screencapture-localhost-fatigram-personal-2022-06-05-18_42_59](https://user-images.githubusercontent.com/79381313/172055190-ee58fd6a-5bff-470e-b82b-7ce551b97ffc.png)
+![screencapture-localhost-fatigram-home-2022-06-05-18_44_17](https://user-images.githubusercontent.com/79381313/172055193-69448dc3-382c-4903-8334-3382f44a1d54.png)
+
